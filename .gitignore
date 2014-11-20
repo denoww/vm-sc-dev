@@ -1,0 +1,8 @@
+apps/
+.vagrant
+.cache
+.bash_history
+.ssh/
+Cheffile.lock
+cookbooks
+tmp
