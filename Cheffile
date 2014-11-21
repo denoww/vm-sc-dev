@@ -11,6 +11,7 @@ cookbook 'nodejs', git: 'https://github.com/mdxp/nodejs-cookbook'
 cookbook 'rvm'
 cookbook 'rbenv', git: 'https://github.com/fnichol/chef-rbenv'
 cookbook 'vim'
+cookbook 'imagemagick'
 
 cookbook 'install_sc_apps', git: 'git@github.com:denoww/chef_install_sc_apps.git'
 

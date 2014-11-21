@@ -7,6 +7,8 @@ ruby_version_release   = "2.0.0-p247"
 folder_shared_guest    = "/home/vagrant"
 folder_shared_host     = "."
 folder_apps = "#{folder_shared_guest}/apps" # add to .gitigore (don't forget this)
+folder_ssh_config = "~/.ssh"
+
 
 # init
 VAGRANTFILE_API_VERSION = "2"
@@ -26,15 +28,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # shared folder
-  config.vm.synced_folder folder_shared_host, folder_shared_guest#, 
+  config.vm.synced_folder folder_shared_host, folder_shared_guest, nfs: true
 
   # port forward
-  config.vm.network :forwarded_port, guest: 3000, host: 3000
+  config.vm.network :forwarded_port, guest: 5000, host: 5000
 
   # copy rsa keys from host to guest
-  config.vm.provision "file", source: "~/.ssh/id_rsa.pub",  destination: "~/.ssh/id_rsa.pub"
-  config.vm.provision "file", source: "~/.ssh/id_rsa",      destination: "~/.ssh/id_rsa"
-  config.vm.provision "file", source: "~/.ssh/known_hosts", destination: "~/.ssh/known_hosts"
+  config.vm.provision "file", source: "~/.ssh/id_rsa.pub",  destination: "#{folder_ssh_config}/id_rsa.pub"
+  config.vm.provision "file", source: "~/.ssh/id_rsa",      destination: "#{folder_ssh_config}/id_rsa"
+  config.vm.provision "file", source: "~/.ssh/known_hosts", destination: "#{folder_ssh_config}/known_hosts"
 
   # chef
   config.vm.provision :chef_solo do |chef|
@@ -54,13 +56,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "mongodb"
     chef.add_recipe "redisio"
     chef.add_recipe "redisio::enable"
+    chef.add_recipe "imagemagick"
     chef.add_recipe "install_sc_apps"
 
     # cookbook configs
     chef.json = {
       sc_config:{
-        folder_apps: folder_apps,
-        enviroment:  enviroment,
+        folder_apps:       folder_apps,
+        enviroment:        enviroment,
+        folder_ssh_config: folder_ssh_config,
       },
       rvm: {
         rubies: [ruby_version_release],

@@ -3,6 +3,7 @@ apps/
 .cache
 .bash_history
 .ssh/
+.irb-history
 Cheffile.lock
 cookbooks
 tmp
