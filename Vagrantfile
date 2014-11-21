@@ -28,9 +28,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # shared folder
-  config.vm.synced_folder folder_shared_host, folder_shared_guest, nfs: true
+  config.vm.synced_folder folder_shared_host, folder_shared_guest#, nfs: true
 
-  # port forward
+  # network
   config.vm.network :forwarded_port, guest: 5000, host: 5000
 
   # copy rsa keys from host to guest
