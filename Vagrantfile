@@ -4,10 +4,10 @@
 # Config
 enviroment             = "development"
 ruby_version_release   = "2.0.0-p247"
-folder_shared_guest    = "/home/vagrant"
-folder_shared_host     = "home/"
-folder_apps = "#{folder_shared_guest}/apps" # add to .gitigore (don't forget this)
-folder_ssh_config = "#{folder_shared_guest}/.ssh"
+home_guest    = "/home/vagrant"
+home_host     = "home/"
+folder_apps = "#{home_guest}/apps" # add to .gitigore (don't forget this)
+folder_ssh_config = "#{home_guest}/.ssh"
 
 
 # init
@@ -33,7 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 
   # shared folder
-  config.vm.synced_folder folder_shared_host, folder_shared_guest, create: true, nfs: true
+  config.vm.synced_folder home_host, home_guest, create: true, nfs: true
 
   config.vm.network "private_network", ip: "192.168.1.25"
 
@@ -58,6 +58,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         folder_apps:       folder_apps,
         enviroment:        enviroment,
         folder_ssh_config: folder_ssh_config,
+        home_guest:        home_guest
       },
       rvm: {
         rubies: [ruby_version_release],
