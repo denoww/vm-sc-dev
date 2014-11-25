@@ -1,15 +1,4 @@
-apps/
 Cheffile.lock
 cookbooks
 tmp
-.vagrant
-.cache
-.bash_history
-.ssh/
-.irb-history
-.bundler/
-.gem/
-.gitconfig
-.heroku/
-.netrc
-.psql_history
+home

@@ -5,7 +5,7 @@
 enviroment             = "development"
 ruby_version_release   = "2.0.0-p247"
 folder_shared_guest    = "/home/vagrant"
-folder_shared_host     = "."
+folder_shared_host     = "home/"
 folder_apps = "#{folder_shared_guest}/apps" # add to .gitigore (don't forget this)
 folder_ssh_config = "#{folder_shared_guest}/.ssh"
 
@@ -22,15 +22,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.insert_key    = true
   config.ssh.password      = "vagrant"
 
-  # 3GB of RAM
+  # 3GB of RAM and 3 CPUs
   config.vm.provider :virtualbox do |vb|
-    vb.customize ["modifyvm", :id, "--memory", "3000"]
+    vb.memory = 3000
+    vb.cpus = 3
   end
+  # config.vm.provider :virtualbox do |vb|
+  #   vb.customize ["modifyvm", :id, "--memory", "3000"]
+  # end
+
 
   # shared folder
-  config.vm.synced_folder folder_shared_host, folder_shared_guest, nfs: true#, mount_options: ["dmode=775","fmode=775"]
-
-  # config.vm.synced_folder "./", "/var/www", id: "vagrant-root", :nfs => false, owner: "vagrant", group: "www-data", mount_options: ["dmode=775","fmode=775"]
+  config.vm.synced_folder folder_shared_host, folder_shared_guest, create: true, nfs: true
 
   config.vm.network "private_network", ip: "192.168.1.25"
 
