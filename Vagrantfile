@@ -24,8 +24,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # 3GB of RAM and 3 CPUs
   config.vm.provider :virtualbox do |vb|
-    vb.memory = 3000
-    vb.cpus = 3
+    vb.memory = 2500
+    vb.cpus = 2
   end
   # config.vm.provider :virtualbox do |vb|
   #   vb.customize ["modifyvm", :id, "--memory", "3000"]
