@@ -22,7 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.insert_key    = true
   config.ssh.password      = "vagrant"
 
-  # 3GB of RAM and 3 CPUs
+  # RAM and CPUs
   config.vm.provider :virtualbox do |vb|
     vb.memory = 2500
     vb.cpus = 2
@@ -35,7 +35,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # shared folder
   config.vm.synced_folder home_host, home_guest, create: true, nfs: true
 
-  config.vm.network "private_network", ip: "192.168.1.25"
+  # config.vm.network "private_network", ip: "192.168.50.4"
+  config.vm.network "private_network", type: "dhcp"
 
   # network
   config.vm.network :forwarded_port, guest: 5000, host: 5000
