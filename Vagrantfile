@@ -3,7 +3,7 @@
 
 # Config
 enviroment             = "development"
-ruby_version_release   = "2.0.0-p247"
+ruby_version_release   = "2.0.0"
 home_guest    = "/home/vagrant"
 home_host     = "home/"
 folder_apps = "#{home_guest}/apps" # add to .gitigore (don't forget this)
