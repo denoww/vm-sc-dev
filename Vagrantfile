@@ -22,7 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.ssh.insert_key    = true
   config.ssh.password      = "vagrant"
 
-  # RAM and CPUs
+  # RAM (metade) e CPUs (todos)
   config.vm.provider :virtualbox do |vb|
     vb.memory = 4000
     vb.cpus = 5
@@ -39,7 +39,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network "private_network", type: "dhcp"
 
   # network
-  config.vm.network :forwarded_port, guest: 5000, host: 5000
+  config.vm.network :forwarded_port, guest: 5000, host: 5000 # rails server
+  config.vm.network :forwarded_port, guest: 5200, host: 5200 # socket.io
 
   # copy rsa keys from host to guest
   config.vm.provision "file", source: "~/.ssh/id_rsa.pub",  destination: "#{folder_ssh_config}/id_rsa.pub"
@@ -70,7 +71,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           # { name: 'rails'   },
           { name: 'chef'    },
         ],
-      },      
+      },
       postgresql: {
         version: "9.3",
         password: {
@@ -79,7 +80,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       }
     }
 
-    chef.log_level = "debug" 
+    chef.log_level = "debug"
   end
 
 
