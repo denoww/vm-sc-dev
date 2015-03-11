@@ -51,8 +51,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = ["cookbooks"]
 
-    chef.add_recipe "sc_infra"
-    chef.add_recipe "install_sc_apps"
+    chef.add_recipe "sc_infra_dev"
+    chef.add_recipe "install_sc_apps_dev"
 
     # cookbook configs
     chef.json = {
