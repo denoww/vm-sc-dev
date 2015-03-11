@@ -1,6 +1,6 @@
 site 'http://community.opscode.com/api/v1'
 
-cookbook 'sc_infra', git: 'git@github.com:denoww/chef_sc_infra.git'
-cookbook 'install_sc_apps', git: 'git@github.com:denoww/chef_install_sc_apps.git'
+cookbook 'sc_infra_dev', git: 'git@github.com:denoww/chef_sc_infra_dev.git'
+cookbook 'install_sc_apps_dev', git: 'git@github.com:denoww/chef_install_sc_apps_dev.git'
 
 
